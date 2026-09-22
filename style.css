@@ -41,7 +41,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .nav.scrolled{position:fixed;top:0;padding:12px 0;background:rgba(18,18,18,.9);backdrop-filter:blur(12px);box-shadow:0 10px 30px -20px rgba(0,0,0,.6)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px;letter-spacing:-.02em;color:#fff}
-.logo svg{width:28px;height:28px;flex:none}
+.logo img{height:40px;width:auto;flex:none}
+.footer .logo img{height:48px}
 .nav-links{display:flex;align-items:center;gap:30px;font-size:15px;font-weight:500;color:#fff}
 .nav-links a:not(.btn){opacity:.9;transition:opacity .2s}
 .nav-links a:not(.btn):hover{opacity:1;color:var(--accent-2)}

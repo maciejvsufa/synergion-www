@@ -38,12 +38,6 @@ WHY_IC = {
 }
 
 
-def logo_svg():
-    return ('<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="12" cy="16" r="9" fill="none" stroke="#fff" stroke-width="2.4"/>'
-            '<circle cx="20" cy="16" r="9" fill="none" stroke="#ff7a0d" stroke-width="2.4"/>'
-            '<path d="M16 8.3a9 9 0 010 15.4 9 9 0 010-15.4z" fill="#ff7a0d"/></svg>')
-
-
 def btn(label, href, style="light", extra=""):
     return f'<a class="btn btn-{style}" href="{href}"{extra}>{label}<span class="ico">{ARROW}</span></a>'
 
@@ -59,9 +53,9 @@ def head(title, desc, p=""):
 <meta name="description" content="{desc}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="assets/img/hero-sm.webp">
+<meta property="og:image" content="{p}assets/img/hero-sm.webp">
 <meta name="theme-color" content="#121212">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23121212'/%3E%3Ccircle cx='13' cy='16' r='7' fill='none' stroke='%23fff' stroke-width='2.2'/%3E%3Ccircle cx='19' cy='16' r='7' fill='none' stroke='%23ff7a0d' stroke-width='2.2'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="{p}assets/img/favicon.png">
 <link rel="preload" href="{p}assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{p}style.css">
 <script>document.documentElement.classList.add("js")</script>
@@ -76,7 +70,7 @@ def nav(p="", solid=False, home=True):
     cls = "nav solid" if solid else "nav"
     return f'''<header class="{cls}">
   <div class="wrap">
-    <a class="logo" href="{p}index.html" aria-label="Synergion — strona główna">{logo_svg()}Synergion</a>
+    <a class="logo" href="{p}index.html" aria-label="Synergion — strona główna"><img src="{p}assets/img/logo-light.png" alt="Synergion" width="347" height="97"></a>
     <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="nav-links">
       <a href="{h}#uslugi">Usługi</a>
@@ -97,7 +91,7 @@ def footer(p="", home=True):
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
-        <a class="logo" href="{p}index.html">{logo_svg()}Synergion</a>
+        <a class="logo" href="{p}index.html"><img src="{p}assets/img/logo-light.png" alt="Synergion" width="347" height="97"></a>
         <p>Pracownia badań i strategii. Od 2010 roku pomagamy firmom zamieniać rozmowy z klientami w dobre decyzje.</p>
         {btn("Umów rozmowę", p + "kontakt.html", "light")}
       </div>
