@@ -205,6 +205,8 @@ WHY = [
 CHIPS1 = ["Insighty konsumenckie", "Badania falowe", "Segmentacja rynku", "Testy komunikacji", "Pozycjonowanie marki", "Wywiady pogłębione", "Grupy fokusowe"]
 CHIPS2 = ["Analiza wspierana AI", "Warsztaty strategiczne", "Testy konceptów", "Ścieżka klienta", "Badania pracownicze", "Architektura marki", "Panel wyników"]
 
+STEP_IMG = ["krok-1", "krok-2", "proces", "krok-4"]
+
 STEPS = [
     ("Brief i pytanie badawcze", "Zaczynamy od rozmowy o decyzji, którą chcesz podjąć. Dopiero potem wybieramy metodę.", ["Warsztat otwierający z zespołem klienta", "Przegląd wiedzy z wcześniejszych projektów", "Plan badania i harmonogram w tydzień"], "Pamięć projektów"),
     ("Projekt i pole badawcze", "Projektujemy kwestionariusz albo scenariusz wywiadu i rekrutujemy właściwych respondentów.", ["Pre-test kwestionariusza na próbie pilotażowej", "Kontrola jakości danych w trakcie pola", "Nagrania i transkrypcje dostępne od razu"], "Automatyczna transkrypcja"),
@@ -274,13 +276,14 @@ def index():
     steps = ""
     for i, (t, d, items, ai) in enumerate(STEPS):
         lis = "".join(f"<li>{x}</li>" for x in items)
-        steps += f'''<div class="step{" on" if i == 0 else ""}"><div class="step-no">KROK 0{i+1}</div><span class="ai">{SPARK}{ai}</span><h3>{t}</h3><p>{d}</p><ul>{lis}</ul></div>'''
+        steps += f'''<div class="step{" on" if i == 0 else ""}" data-step="{i}"><div class="step-inner"><div class="step-big">0{i+1}</div><span class="ai">{SPARK}{ai}</span><h3>{t}</h3><p>{d}</p><ul>{lis}</ul><img class="step-img" src="assets/img/{STEP_IMG[i]}.webp" alt="" loading="lazy"></div></div>'''
+    layers = "".join(f'<img class="pm{" on" if i == 0 else ""}" data-i="{i}" src="assets/img/{im}.webp" alt="" loading="lazy">' for i, im in enumerate(STEP_IMG))
 
     cases = ""
     for c in CASES:
         tags = "".join(f"<span>{t}</span>" for t in c["tags"])
         checks = "".join(f"<li>{CHECK}{x}</li>" for x in c["checks"])
-        cases += f'''<article class="case rv">
+        cases += f'''<article class="case">
         <a class="case-img" href="projekty/{c["slug"]}.html"><img src="assets/img/{c["img"]}.webp" alt="" loading="lazy"></a>
         <div class="case-body">
           <h3>{c["short"]}</h3>
@@ -312,11 +315,11 @@ def index():
   <div class="hero-bg" role="img" aria-label="Michał Kociankowski podczas wystąpienia"></div>
   <div class="wrap">
     <div class="hero-inner">
-      <div class="rating rv"><span class="stars">{stars}</span>200+ projektów badawczych od 2010 roku</div>
-      <h1 class="rv d1">Od rozmowy<br><em>do decyzji</em></h1>
-      <p class="lead rv d2">Jesteśmy pracownią badań i strategii. Łączymy 30 lat doświadczenia w badaniach rynku z narzędziami AI, dzięki którym szybciej słyszymy, co naprawdę mówią Twoi klienci, i zamieniamy to w decyzje.</p>
-      <div class="hero-ctas rv d3">{btn("Umów rozmowę", "kontakt.html", "light")}<a class="btn btn-ghost" href="#uslugi">Zobacz usługi</a></div>
-      <div class="hero-points rv d4"><span>Badania jakościowe i ilościowe</span><span>Analiza wspierana AI</span><span>Strategia oparta na danych</span></div>
+      <div class="rating rv d1"><span class="stars">{stars}</span>200+ projektów badawczych od 2010 roku</div>
+      <h1 data-split>Od rozmowy<br><em>do decyzji</em></h1>
+      <p class="lead rv d3">Jesteśmy pracownią badań i strategii. Łączymy 30 lat doświadczenia w badaniach rynku z narzędziami AI, dzięki którym szybciej słyszymy, co naprawdę mówią Twoi klienci, i zamieniamy to w decyzje.</p>
+      <div class="hero-ctas rv d4">{btn("Umów rozmowę", "kontakt.html", "light")}<a class="btn btn-ghost" href="#uslugi">Zobacz usługi</a></div>
+      <div class="hero-points rv d5"><span>Badania jakościowe i ilościowe</span><span>Analiza wspierana AI</span><span>Strategia oparta na danych</span></div>
     </div>
   </div>
   <div class="ai-chip rv d4"><span class="pulse"></span><div><b>Fala 4 · raport gotowy</b><small>24 h po zamknięciu pola</small></div></div>
@@ -331,14 +334,14 @@ def index():
 
 <section class="sec" id="uslugi">
   <div class="wrap">
-    <div class="head rv">{tag("uslugi", "Usługi")}<h2>Jak pomagamy <em>widzieć więcej</em></h2><p>Badania i doradztwo, które zamieniają głos klientów w konkretne kierunki działania.</p></div>
+    <div class="head stag">{tag("uslugi", "Usługi")}<h2>Jak pomagamy <em>widzieć więcej</em></h2><p>Badania i doradztwo, które zamieniają głos klientów w konkretne kierunki działania.</p></div>
     <div class="services">{svcs}</div>
   </div>
 </section>
 
 <section class="sec sec-soft" id="dlaczego">
   <div class="wrap">
-    <div class="head rv">{tag("why", "Dlaczego Synergion")}<h2>Doświadczenie, które <em>wyprzedza zmiany</em></h2><p>Łączymy metodologię, wiedzę o ludziach i nowoczesne narzędzia, żeby dostarczać wnioski, na których można oprzeć decyzje.</p></div>
+    <div class="head stag">{tag("why", "Dlaczego Synergion")}<h2>Doświadczenie, które <em>wyprzedza zmiany</em></h2><p>Łączymy metodologię, wiedzę o ludziach i nowoczesne narzędzia, żeby dostarczać wnioski, na których można oprzeć decyzje.</p></div>
     <div class="why">
       <div class="why-photo rv"><img src="assets/img/dlaczego.webp" alt="" loading="lazy"><div class="why-stat"><strong><span data-count="30">30</span>+</strong><span>lat doświadczenia w badaniach</span>{btn("Umów rozmowę", "kontakt.html", "light")}</div></div>
       {why}
@@ -361,7 +364,7 @@ def index():
 
 <section class="sec sec-soft" id="wspolpraca">
   <div class="wrap">
-    <div class="head rv">{tag("plans", "Formy współpracy")}<h2>Współpraca dopasowana <em>do Twojego pytania</em></h2><p>Jednorazowy projekt albo stały program badań. Wycenę przygotujemy po pierwszej rozmowie.</p></div>
+    <div class="head stag">{tag("plans", "Formy współpracy")}<h2>Współpraca dopasowana <em>do Twojego pytania</em></h2><p>Jednorazowy projekt albo stały program badań. Wycenę przygotujemy po pierwszej rozmowie.</p></div>
     <div class="plans">
       <div class="plan rv d1"><div class="plan-name"><i>{TAGI["plans"]}</i>Projekt badawczy</div><div class="plan-price">Indywidualnie<small>/ projekt</small></div><p>Dla firm, które stoją przed konkretną decyzją: nowy produkt, zmiana komunikacji, wejście na rynek.</p>{btn("Zapytaj o wycenę", "kontakt.html", "dark")}<ul>{plan1}</ul></div>
       <div class="plan hot rv d2"><span class="badge">Najczęściej wybierane</span><div class="plan-name"><i>{SPARK}</i>Stały program badań</div><div class="plan-price">Abonament<small>/ miesiąc</small></div><p>Dla firm, które chcą regularnie mierzyć markę, satysfakcję klientów albo nastroje pracowników.</p>{btn("Porozmawiajmy", "kontakt.html", "dark")}<ul>{plan2}</ul></div>
@@ -371,11 +374,12 @@ def index():
 
 <section class="sec sec-dark" id="jak-pracujemy">
   <div class="wrap">
-    <div class="head rv">{tag("proc", "Nasz proces")}<h2>Jak <em>pracujemy</em></h2><p>Jasna droga od pytania badawczego do decyzji. AI przejmuje powtarzalną pracę, a badacz odpowiada za wnioski.</p></div>
+    <div class="head stag">{tag("proc", "Nasz proces")}<h2>Jak <em>pracujemy</em></h2><p>Jasna droga od pytania badawczego do decyzji. AI przejmuje powtarzalną pracę, a badacz odpowiada za wnioski.</p></div>
     <div class="process">
       <div class="steps">{steps}</div>
       <div class="proc-media">
-        <img src="assets/img/proces.webp" alt="" loading="lazy">
+        {layers}
+        <div class="proc-count"><span>01</span> / 04</div>
         <div class="proc-panel">
           <div class="proc-panel-top"><b>Tracking marki · fala 4</b><span>aktualizacja 06:12</span></div>
           <div class="bars"><i style="height:40%"></i><i style="height:55%"></i><i style="height:48%"></i><i style="height:66%"></i><i style="height:58%"></i><i style="height:74%"></i><i style="height:70%"></i><i style="height:88%"></i><i style="height:80%"></i><i style="height:96%"></i></div>
@@ -388,14 +392,14 @@ def index():
 
 <section class="sec" id="projekty">
   <div class="wrap">
-    <div class="head rv">{tag("cases", "Projekty")}<h2>Zobacz efekty <em>naszej pracy</em></h2><p>Wybrane projekty, w których badanie zamieniło się w decyzję.</p></div>
-    <div class="cases">{cases}</div>
+    <div class="head stag">{tag("cases", "Projekty")}<h2>Zobacz efekty <em>naszej pracy</em></h2><p>Wybrane projekty, w których badanie zamieniło się w decyzję.</p></div>
+    <div class="cases stack">{cases}</div>
   </div>
 </section>
 
 <section class="sec sec-soft" id="opinie">
   <div class="wrap">
-    <div class="head rv">{tag("reviews", "Opinie")}<h2>Dlaczego klienci <em>nam ufają</em></h2><p>Kilka słów od osób, z którymi pracowaliśmy.</p></div>
+    <div class="head stag">{tag("reviews", "Opinie")}<h2>Dlaczego klienci <em>nam ufają</em></h2><p>Kilka słów od osób, z którymi pracowaliśmy.</p></div>
     <div class="reviews marquee"><div class="marquee-track">{revs}</div></div>
     <div class="stats rv">
       <div class="stat"><b><span data-count="200">200</span>+</b><span>projektów badawczych</span></div>
@@ -408,14 +412,14 @@ def index():
 
 <section class="sec" id="zespol">
   <div class="wrap">
-    <div class="head rv">{tag("team", "Zespół")}<h2>Poznaj ludzi, którzy <em>zadają właściwe pytania</em></h2><p>Badacze, psycholożka, analityczki danych i project managerki. Łączy nas ciekawość ludzi i rzetelność w pracy z danymi.</p></div>
+    <div class="head stag">{tag("team", "Zespół")}<h2>Poznaj ludzi, którzy <em>zadają właściwe pytania</em></h2><p>Badacze, psycholożka, analityczki danych i project managerki. Łączy nas ciekawość ludzi i rzetelność w pracy z danymi.</p></div>
     <div class="team">{team}</div>
   </div>
 </section>
 
 <section class="sec sec-soft" id="faq">
   <div class="wrap">
-    <div class="head rv">{tag("faq", "FAQ")}<h2>Pytania i odpowiedzi</h2><p>Najważniejsze informacje, zanim zaczniemy współpracę.</p></div>
+    <div class="head stag">{tag("faq", "FAQ")}<h2>Pytania i odpowiedzi</h2><p>Najważniejsze informacje, zanim zaczniemy współpracę.</p></div>
     <div class="faq rv">{faq}</div>
   </div>
 </section>
