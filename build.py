@@ -229,9 +229,9 @@ REVIEWS = [
 TEAM = [
     ("michal", "Michał Kociankowski", "Założyciel i strateg badań", True),
     ("malgorzata", "Małgorzata Kowalewska", "Psycholożka, badaczka postaw i motywacji", False),
-    ("magdalena", "Magdalena Kępka", "Badaczka jakościowa, moderatorka", False),
-    ("justyna", "Justyna", "Analityczka danych i AI", False),
-    ("maja", "Maja", "Koordynatorka projektów badawczych", False),
+    ("magdalena", "Magdalena Kępka", "Business Project Manager, analityczka danych, AI creator", False),
+    ("justyna", "Justyna", "Project Manager, badaczka jakościowa, trendwatcherka", False),
+    ("maja", "Maja", "Project Manager, analityczka danych", False),
 ]
 
 FAQ = [
@@ -414,7 +414,7 @@ def index():
 
 <section class="sec" id="zespol">
   <div class="wrap">
-    <div class="head rv">{tag("team", "Zespół")}<h2>Poznaj ludzi, którzy <em>zadają właściwe pytania</em></h2><p>Badacze, psycholożka i analitycy. Łączy nas ciekawość ludzi i rzetelność w pracy z danymi.</p></div>
+    <div class="head rv">{tag("team", "Zespół")}<h2>Poznaj ludzi, którzy <em>zadają właściwe pytania</em></h2><p>Badacze, psycholożka, analityczki danych i project managerki. Łączy nas ciekawość ludzi i rzetelność w pracy z danymi.</p></div>
     <div class="team">{team}</div>
   </div>
 </section>
